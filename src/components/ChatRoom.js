@@ -9,7 +9,8 @@ import ChatMessage from "./ChatMessage";
 function ChatRoom() {
   const dummy = useRef();
   const messagesRef = firestore.collection("messages"); //referanceing a firebase collection
-  const query = messagesRef.orderBy("createdAt").limit(25); //query documents in the collection while ordering them by the "createdAt" time stamp,
+  const query = messagesRef.orderBy("createdAt").limit(1000); //query documents in the collection while ordering them by the "createdAt" time stamp,
+
   // and limiting them to a max of 25
   const [messages] = useCollectionData(query, { idField: "id" }); //listening to the data in real time,
   // it returns an array of objects where each object is the chat message and the database
