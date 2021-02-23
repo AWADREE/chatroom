@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import firebase from "firebase";
 import { useCollectionData } from "react-firebase-hooks/firestore";
 
@@ -31,8 +31,17 @@ function ChatRoom() {
     //this will reslove when the document is created
 
     setFormValue("");
+    scrollToBottom();
+  };
 
-    dummy.current.scrollIntoView({ behavior: "smooth" }); //we added an empty div at the bottom of the messages and referanced it and scrolling to it after sending a message
+  //when the component renders and whenever the components updates scroll to the bottom
+  useEffect(() => {
+    scrollToBottom();
+  });
+
+  //we added an empty div at the bottom of the messages and referanced it and scrolling to it after sending a message
+  const scrollToBottom = () => {
+    dummy.current.scrollIntoView({ behavior: "smooth" });
   };
 
   return (
