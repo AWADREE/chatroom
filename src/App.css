@@ -170,10 +170,12 @@ p {
   color: black;
   background: #f2cc00;
   align-self: flex-end;
+  text-align: left;
 }
 .received p {
   background: #5e5e5e;
   color: white;
+  text-align: left;
 }
 
 img {
