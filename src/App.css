@@ -4,8 +4,15 @@ body {
 
 .App {
   text-align: center;
-  max-width: 728px;
+  max-width: 450px;
+  /* max-width: 728px; */
   margin: 0 auto;
+}
+
+header > h1 {
+  color: black;
+  margin-left: 15%;
+  font-family: cursive;
 }
 
 .App header {
@@ -15,7 +22,7 @@ body {
   color: white;
   position: fixed;
   width: 100%;
-  max-width: 728px;
+  max-width: 450px;
   top: 0;
   display: flex;
   align-items: center;
@@ -60,15 +67,26 @@ form {
   bottom: 0;
   background-color: #181717;
   width: 100%;
-  max-width: 728px;
+  max-width: 450px;
   display: flex;
   font-size: 1.5rem;
 }
 
 form button {
-  width: 20%;
+  width: 30%;
   background-color: #f2cc00;
   color: black;
+  font-weight: bold;
+  transition: background-color 100ms ease-out;
+}
+form button:hover:disabled {
+  background-color: #f2cc00;
+  color: black;
+}
+form button:hover {
+  background-color: #ffd900;
+  color: black;
+  transition: background-color 100ms ease-out;
 }
 
 input {
@@ -83,7 +101,7 @@ input {
 }
 
 button {
-  background-color: #282c34; /* Green */
+  background-color: #282c34;
   border: none;
   color: white;
   padding: 15px 32px;
@@ -92,18 +110,34 @@ button {
   display: inline-block;
   cursor: pointer;
   font-size: 1.25rem;
+  transition: background-color 100ms ease-out;
+}
+button:hover {
+  background-color: #ce2020;
+  color: white;
+  transition: background-color 100ms ease-out;
 }
 
 button:disabled {
   opacity: 0.5;
-  cursor: not-allowed;
+  cursor: default !important;
 }
 
 .sign-in {
   color: #282c34;
-  background: white;
+  background: #f2cc00;
   max-width: 400px;
   margin: 0 auto;
+  font-weight: 600;
+  font-size: 20px;
+}
+
+.sign-in:hover {
+  color: #282c34;
+  background: #ffd900;
+  max-width: 400px;
+  margin: 0 auto;
+  transition: background-color 100ms ease-out;
 }
 
 ul,
