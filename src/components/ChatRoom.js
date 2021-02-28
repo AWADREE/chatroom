@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import firebase from "firebase";
 import { useCollectionData } from "react-firebase-hooks/firestore";
-import UIfx from "uifx";
+import useSound from "use-sound";
 
 import { auth, firestore } from "../firebase";
 import nSound from "../pop.mp3";
@@ -38,7 +38,7 @@ function ChatRoom() {
   };
 
   //this function playes a sound
-  const tick = new UIfx(nSound);
+  const [play] = useSound(nSound);
 
   //when the component renders and whenever the components updates scroll to the bottom
   useEffect(() => {
@@ -47,7 +47,7 @@ function ChatRoom() {
 
   //when messages change play a notification sound
   useEffect(() => {
-    tick.play();
+    play();
   }, [messages]);
 
   //we added an empty div at the bottom of the messages and referanced it and scrolling to it after sending a message
