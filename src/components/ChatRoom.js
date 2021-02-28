@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 import firebase from "firebase";
 import { useCollectionData } from "react-firebase-hooks/firestore";
 import useSound from "use-sound";
+import FlipMove from "react-flip-move";
 
 import { auth, firestore } from "../firebase";
 import nSound from "../pop.mp3";
@@ -58,9 +59,10 @@ function ChatRoom() {
   return (
     <>
       <main>
-        {messages &&
-          messages.map((msg) => <ChatMessage key={msg.id} message={msg} />)}
-
+        <FlipMove>
+          {messages &&
+            messages.map((msg) => <ChatMessage key={msg.id} message={msg} />)}
+        </FlipMove>
         <span ref={dummy}></span>
       </main>
 
