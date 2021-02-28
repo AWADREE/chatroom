@@ -157,13 +157,16 @@ p {
   position: relative;
   color: white;
   text-align: center;
+  max-width: 70%;
+  overflow-wrap: break-word;
 }
 
 .message {
   display: flex;
   align-items: center;
   margin-top: 1px;
-  min-height: 9.5vh;
+  margin-bottom: 1px;
+  min-height: fit-content;
 }
 
 .sent {
