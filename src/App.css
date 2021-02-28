@@ -45,6 +45,8 @@ main {
   height: 80vh;
   margin: 10vh 0 10vh;
   overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
+  /* -webkit-overflow-scrolling: touch; this line makes overflow-y: scroll; work on mobile */
   display: flex;
   flex-direction: column;
 }
@@ -160,6 +162,8 @@ p {
 .message {
   display: flex;
   align-items: center;
+  /* margin-top: 3px;
+  margin-bottom: 3px; */
 }
 
 .sent {
