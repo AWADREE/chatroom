@@ -12,11 +12,13 @@ import ChatMessage from "./ChatMessage";
 function ChatRoom() {
   const dummy = useRef();
   const messagesRef = firestore.collection("messages"); //referanceing a firebase collection
-  const query = messagesRef.orderBy("createdAt").limit(1000); //query documents in the collection while ordering them by the "createdAt" time stamp,
+  const query = messagesRef.orderBy("createdAt", "desc").limit(25); //query documents in the collection while ordering them by the "createdAt" time stamp,
+  // in desending order and limiting them to a max of 25, we will reverse them before mapping later but we had to get them in decending order now,
+  //to be able to get the last 25 instead of the first 25
 
-  // and limiting them to a max of 25
   const [messages] = useCollectionData(query, { idField: "id" }); //listening to the data in real time,
   // it returns an array of objects where each object is the chat message and the database
+
   const [formValue, setFormValue] = useState("");
 
   //this function takes the event given to it by the onSubmit
@@ -61,7 +63,9 @@ function ChatRoom() {
       <main>
         <FlipMove>
           {messages &&
-            messages.map((msg) => <ChatMessage key={msg.id} message={msg} />)}
+            messages
+              .reverse()
+              .map((msg) => <ChatMessage key={msg.id} message={msg} />)}
         </FlipMove>
         <span ref={dummy}></span>
       </main>
