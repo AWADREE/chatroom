@@ -19,6 +19,9 @@ function ChatRoom() {
   const [messages] = useCollectionData(query, { idField: "id" }); //listening to the data in real time,
   // it returns an array of objects where each object is the chat message and the database
 
+  //reordering the messages
+  const orderedMessages = messages.reverse();
+
   const [formValue, setFormValue] = useState("");
 
   //this function takes the event given to it by the onSubmit
@@ -51,7 +54,7 @@ function ChatRoom() {
   //when messages change play a notification sound
   useEffect(() => {
     play();
-  }, [messages]);
+  }, [orderedMessages]);
 
   //we added an empty div at the bottom of the messages and referanced it and scrolling to it after sending a message
   const scrollToBottom = () => {
@@ -62,10 +65,10 @@ function ChatRoom() {
     <>
       <main>
         <FlipMove>
-          {messages &&
-            messages
-              .reverse()
-              .map((msg) => <ChatMessage key={msg.id} message={msg} />)}
+          {orderedMessages &&
+            orderedMessages.map((msg) => (
+              <ChatMessage key={msg.id} message={msg} />
+            ))}
         </FlipMove>
         <span ref={dummy}></span>
       </main>
