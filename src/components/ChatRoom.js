@@ -15,12 +15,17 @@ function ChatRoom() {
   const query = messagesRef.orderBy("createdAt", "desc").limit(25); //query documents in the collection while ordering them by the "createdAt" time stamp,
   // in desending order and limiting them to a max of 25, we will reverse them before mapping later but we had to get them in decending order now,
   //to be able to get the last 25 instead of the first 25
+  let orderedMessages;
 
-  const [messages] = useCollectionData(query, { idField: "id" }); //listening to the data in real time,
+  const [messages, loading] = useCollectionData(query, {
+    idField: "id",
+  }); //listening to the data in real time,
   // it returns an array of objects where each object is the chat message and the database
+  //and it returns a boolian while is true untill its finished loading
 
-  //reordering the messages
-  const orderedMessages = messages.reverse();
+  if (!loading) {
+    orderedMessages = messages.reverse();
+  }
 
   const [formValue, setFormValue] = useState("");
 
@@ -54,7 +59,7 @@ function ChatRoom() {
   //when messages change play a notification sound
   useEffect(() => {
     play();
-  }, [orderedMessages]);
+  }, [messages]);
 
   //we added an empty div at the bottom of the messages and referanced it and scrolling to it after sending a message
   const scrollToBottom = () => {
