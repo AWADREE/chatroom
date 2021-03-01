@@ -2,7 +2,6 @@ import React, { useState, useRef, useEffect } from "react";
 import firebase from "firebase";
 import { useCollectionData } from "react-firebase-hooks/firestore";
 import useSound from "use-sound";
-import FlipMove from "react-flip-move";
 
 import { auth, firestore } from "../firebase";
 import nSound from "../pop.mp3";
@@ -12,10 +11,11 @@ import ChatMessage from "./ChatMessage";
 function ChatRoom() {
   const dummy = useRef();
   const messagesRef = firestore.collection("messages"); //referanceing a firebase collection
-  const query = messagesRef.orderBy("createdAt", "desc").limit(25); //query documents in the collection while ordering them by the "createdAt" time stamp,
+  const query = messagesRef.orderBy("createdAt").limit(1000); //query documents in the collection while ordering them by the "createdAt" time stamp,
+  // const query = messagesRef.orderBy("createdAt", "desc").limit(25); //query documents in the collection while ordering them by the "createdAt" time stamp,
   // in desending order and limiting them to a max of 25, we will reverse them before mapping later but we had to get them in decending order now,
   //to be able to get the last 25 instead of the first 25
-  let orderedMessages;
+  // let orderedMessages;
 
   const [messages, loading] = useCollectionData(query, {
     idField: "id",
@@ -23,9 +23,9 @@ function ChatRoom() {
   // it returns an array of objects where each object is the chat message and the database
   //and it returns a boolian while is true untill its finished loading
 
-  if (!loading) {
-    orderedMessages = messages.reverse();
-  }
+  // if (!loading) {
+  //   orderedMessages = messages.reverse();
+  // }
 
   const [formValue, setFormValue] = useState("");
 
@@ -69,12 +69,9 @@ function ChatRoom() {
   return (
     <>
       <main>
-        <FlipMove>
-          {orderedMessages &&
-            orderedMessages.map((msg) => (
-              <ChatMessage key={msg.id} message={msg} />
-            ))}
-        </FlipMove>
+        {messages &&
+          messages.map((msg) => <ChatMessage key={msg.id} message={msg} />)}
+
         <span ref={dummy}></span>
       </main>
 

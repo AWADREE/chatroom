@@ -1,8 +1,8 @@
-import React, { forwardRef } from "react";
+import React from "react";
 
 import { auth } from "../firebase";
 
-const ChatMessage = forwardRef((props, ref) => {
+const ChatMessage = (props) => {
   //destructureing the text, and the uid from the message prop
   const { text, uid, photoURL } = props.message;
 
@@ -10,11 +10,11 @@ const ChatMessage = forwardRef((props, ref) => {
   //if not then messageClass is received
 
   return (
-    <div className={`message ${messageClass}`} ref={ref}>
+    <div className={`message ${messageClass}`}>
       <img src={photoURL} />
       <p>{text}</p>
     </div>
   );
-});
+};
 
 export default ChatMessage;
