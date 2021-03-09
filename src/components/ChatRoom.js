@@ -36,12 +36,17 @@ function ChatRoom() {
     const { uid, photoURL } = auth.currentUser;
     //creating a new document in firestore, the add function takes an object
 
-    await messagesRef.add({
-      text: formValue,
-      createdAt: firebase.firestore.FieldValue.serverTimestamp(), //this is how to get the server timestamp of the message
-      uid,
-      photoURL,
-    });
+    //this if statment will add a message to the db only if the text is not just spaces
+    if (formValue.trim() === "") {
+      return;
+    } else {
+      await messagesRef.add({
+        text: formValue,
+        createdAt: firebase.firestore.FieldValue.serverTimestamp(), //this is how to get the server timestamp of the message
+        uid,
+        photoURL,
+      });
+    }
     //this will reslove when the document is created
 
     setFormValue("");
@@ -82,7 +87,8 @@ function ChatRoom() {
         />
         {/* bind the state to the form input, whenever the value of the input changes , the form value state will be set to the value of the input */}
 
-        <button type="submit" disabled={!formValue}>
+        <button type="submit" disabled={!formValue || formValue.trim() === ""}>
+          {/* disabling the button if there is no text or if the text was just spaces */}
           Send
         </button>
       </form>
